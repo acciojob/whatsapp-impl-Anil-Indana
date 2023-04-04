@@ -1,5 +1,7 @@
 package com.driver;
 
+import net.bytebuddy.asm.Advice;
+
 import java.util.Date;
 
 public class Message {
@@ -11,6 +13,15 @@ public class Message {
         this.id = id;
         this.content = content;
         this.timestamp = timestamp;
+    }
+    public Message(int id,String content){
+        this.id = id;
+        this.content = content;
+        this.timestamp = new Date();
+    }
+    public Message(int id){
+        this.id = id;
+        this.timestamp = new Date();
     }
 
     public int getId() {
