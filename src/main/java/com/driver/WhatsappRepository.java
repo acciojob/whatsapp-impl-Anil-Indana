@@ -34,12 +34,15 @@ public class WhatsappRepository {
         userData.put(mobile,new User(mobile,name));
     }
     public Group createGroup(List<User> users){
+        if(users.size() == 2) {
+            String groupName = users.get(1).getName();
+            Group group = new Group(groupName,2);
+            groupUserMap.put(group,users);
+            return group;
+        }
         this.customGroupCount++;
-        int groupSize = users.size();
-        String groupName = "";
-        if(users.size() == 2) groupName = users.get(users.size()-1).getName();
-        else groupName = "Group " + groupSize;
-        Group group = new Group(groupName,groupSize);
+        String groupName = "Group " + this.customGroupCount;
+        Group group = new Group(groupName,users.size());
         groupUserMap.put(group,users);
         adminMap.put(group,users.get(0));
         return group;
